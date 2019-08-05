@@ -1,0 +1,162 @@
+html, body {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-flow: column;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    font-family: 'Roboto', sans-serif;
+}
+body {
+    background-image: url("../images/bookshelf.jpg");
+}
+#main {
+    width: 650px;
+    min-width: 650px;
+    margin-top: 100px;
+}
+#mainTitleSection {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    height: 60px;
+    margin-bottom: 10px;
+}
+#mainTitle {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 40px;
+    color: white;
+    text-shadow: 0px 0px 5px #000;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+h2 {
+    font-family: 'Libre Baskerville', serif;
+}
+#addBookContainer {
+    height: 100%;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
+#addBook {
+    font-size: 15px;
+    height: 35px;
+    width: 110px;
+    border-radius: 4px;
+}
+#headings {
+    display: flex;
+    padding-left: 10px;
+    color: white;
+    text-shadow: 0px 0px 5px #000;
+}
+#headings div {
+    width: 23%;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px;
+}
+#headings #headStatus {
+    width: 31%;
+}
+.card {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 3px;
+    box-shadow: 0px 1px #CCC;
+    background-color: rgba(255,255,255,1);
+}
+.bookInfo {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex: 1 1 23%;
+    padding: 5px;
+}
+.configSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    height: 100%;
+    flex: 1 1 8%;
+}
+#dialogContainer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 100;
+}
+#addBookDialogBox {
+    background: #CCC;
+    border-radius: 5px;
+    width: 450px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    margin-top: 125px;
+}
+#inputSection {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+.input {
+    display: flex;
+    justify-content: left;
+    width: 100%;
+    margin-bottom: 10px;
+}
+.input div:first-child {
+    width: 20%;
+}
+.input div:last-child {
+    width: 80%;
+}
+.input div input[type='text']  {
+    width: 100%;
+    height: 20px;
+    border: 1px;
+    border-radius: 3px;
+    padding-left: 3px;
+}
+#dialogControls {
+    display:flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+    width: 80%;
+}
+#statusSelection {
+    display: flex;
+}
+#footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: absolute;
+    padding-right: 20px;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    background: #ccc;
+    font-size: 14px;
+}
+img {
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+}
