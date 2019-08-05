@@ -6,13 +6,13 @@ let editingBookId = ''
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
-    apiKey: "",
+    apiKey: "AIzaSyApSfllCOhaIB3eLV3pE4dqf58vdkp_1zQ",
     authDomain: "top-libraryapp.firebaseapp.com",
     databaseURL: "https://top-libraryapp.firebaseio.com",
     projectId: "top-libraryapp",
     storageBucket: "top-libraryapp.appspot.com",
     messagingSenderId: "273001893707",
-    appId: ""
+    appId: "1:273001893707:web:5931d619e96a3dcf"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
