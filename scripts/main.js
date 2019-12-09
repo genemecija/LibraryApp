@@ -61,32 +61,36 @@ function showAddBookDialogBox(title) {
     dialog.setAttribute('id','addBookDialogBox')
     dialog.innerHTML = `
     <div id="addBookDialogTitle"><h2>${title}</h2></div>
-    <div id="inputSection">
-        <div class='input' id='titleSection'>
-            <div class='inputDescriptor'>Title:</div>
-            <div class='inputField'><input type="text" name="bookInfo_title" id="title"></div>
-        </div>
-        <div class='input' id='authorSection'>
-            <div class='inputDescriptor'>Author:</div>
-            <div class='inputField'><input type="text" name="bookInfo_author" id="author"></div>
-        </div>
-        <div class='input' id='genreSection'>
-            <div class='inputDescriptor'>Genre:</div>
-            <div class='inputField'><input type="text" name="bookInfo_genre" id="genre"></div>
-        </div>
-        <div class='input' id='statusSection'>
-            <div class='inputDescriptor'>Status:</div>
-            <div id="statusSelection">
-                <input type="radio" name="bookInfo_status" id="notStarted" value="Not Started"> Not Started
-                <input type="radio" name="bookInfo_status" id="inProgress" value="In Progress"> In Progress
-                <input type="radio" name="bookInfo_status" id="read" value="Read"> Read
+    <form OnClientClick="return ValidateForm()">
+        <div id="inputSection">
+            <div class='input' id='titleSection'>
+                <div class='inputDescriptor'>Title:</div>
+                <div class='inputField'><input type="text" name="bookInfo_title" id="title" required></div>
+            </div>
+            <div class='input' id='authorSection'>
+                <div class='inputDescriptor'>Author:</div>
+                <div class='inputField'><input type="text" name="bookInfo_author" id="author" required></div>
+            </div>
+            <div class='input' id='genreSection'>
+                <div class='inputDescriptor'>Genre:</div>
+                <div class='inputField'><input type="text" name="bookInfo_genre" id="genre" required></div>
+            </div>
+            <div class='input' id='statusSection'>
+                <div class='inputDescriptor'>Status:</div>
+                <div id="statusSelection">
+                    <input type="radio" name="bookInfo_status" id="notStarted" value="Not Started" required> Not Started
+                    <input type="radio" name="bookInfo_status" id="inProgress" value="In Progress"> In Progress
+                    <input type="radio" name="bookInfo_status" id="read" value="Read"> Read
+                </div>
             </div>
         </div>
-    </div>
-    <div id="dialogControls">
-        <button id="submit">Submit</button>
-        <button id="cancel">Cancel</button>
-    </div>`
+
+        <div id="dialogControls">
+            <span class="error" aria-live="polite"></span>
+            <button id="submit">Submit</button>
+            <button id="cancel">Cancel</button>
+        </div>
+    </form>`
     dialogContainer.appendChild(dialog)
     let body = document.querySelector('body')
     body.append(dialogContainer)
@@ -97,32 +101,55 @@ function showAddBookDialogBox(title) {
 }
 
 
+
 function submit() {
-    const mode = document.querySelector('#addBookDialogTitle')
-    if (mode.textContent == 'Edit Book') {
-        db.collection("books").doc(editingBookId).delete().then(function() {
-            console.log("Document successfully deleted!");
-        }).catch(function(error) {
-            console.error("Error removing document: ", error);
-        });
-        editingBook = ''
-    }
-    const title = document.querySelector('input#title').value
-    const author = document.querySelector('input#author').value
-    const genre = document.querySelector('input#genre').value
-    const statusOptions = document.getElementsByName('bookInfo_status')
-    let status = 'Not Started'
-    for (let i = 0; i < statusOptions.length; i++) {
-        if (statusOptions[i].checked) {
-            status = statusOptions[i].value;
+    if (document.querySelector('input#title').validity.valid) {
+        if (document.querySelector('input#author').validity.valid){
+            if (document.querySelector('input#genre').validity.valid) {
+                if (document.getElementsByName('bookInfo_status')) {
+                    const mode = document.querySelector('#addBookDialogTitle')
+                    if (mode.textContent == 'Edit Book') {
+                        db.collection("books").doc(editingBookId).delete().then(function() {
+                            console.log("Document successfully deleted!");
+                        }).catch(function(error) {
+                            console.error("Error removing document: ", error);
+                        });
+                        editingBook = ''
+                    }
+                    const title = document.querySelector('input#title').value
+                    const author = document.querySelector('input#author').value
+                    const genre = document.querySelector('input#genre').value
+                    const statusOptions = document.getElementsByName('bookInfo_status')
+                    let status = 'Not Started'
+                    for (let i = 0; i < statusOptions.length; i++) {
+                        if (statusOptions[i].checked) {
+                            status = statusOptions[i].value;
+                        }
+                    }
+
+                    addBookToLibrary(title, author, genre, status)
+                    let body = document.querySelector('body')
+                    body.removeChild(document.querySelector('#dialogContainer'))
+                    render()
+                } else { alert('hello')}
+            }
         }
     }
-
-    addBookToLibrary(title, author, genre, status)
-    let body = document.querySelector('body')
-    body.removeChild(document.querySelector('#dialogContainer'))
-    render()
+    
 }
+
+// function validateMyForm() {
+//   if(check if your conditions are not satisfying)
+//   { 
+//     alert("validation failed false");
+//     returnToPreviousPage();
+//     return false;
+//   }
+
+//   alert("validations passed");
+//   return true;
+// }
+
 function cancel() {
     let body = document.querySelector('body')
     body.removeChild(document.querySelector('#dialogContainer'))
